@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library name="Batik">
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-anim/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-awt-util/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-bridge/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-bridge/src/test/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-codec/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-constants/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-css/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-css/src/test/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-dom/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-ext/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-extension/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-gui-util/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-gvt/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-i18n/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-parser/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-script/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-slideshow/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-svg-dom/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-svgbrowser/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-svggen/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-svgpp/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-svgrasterizer/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-swing/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-swing/src/test/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-test-old/src/test/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-test-svg/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-test-swing/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-test/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-transcoder/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-ttf2svg/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-util/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-util/src/test/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/batik-xml/src/main/java" />
+          <root url="file://$MODULE_DIR$/batik-1.18/contrib/rasterizertask/sources" />
+          <root url="file://$MODULE_DIR$/batik-1.18/documentation-sources/content/demo" />
+          <root url="file://$MODULE_DIR$/batik-1.18/samples/tests/resources/java/sources" />
+          <root url="file://$MODULE_DIR$/batik-1.18/test-resources" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
