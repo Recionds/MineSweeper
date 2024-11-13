@@ -1,3 +1,3 @@
 package MineSweeper;
 
-public enum Level { ROW, MIDDLE, HIGH };
+public enum Level { LOW, MIDDLE, HIGH, CHALLENGE };
