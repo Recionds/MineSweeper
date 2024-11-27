@@ -1,14 +1,15 @@
 package MineSweeper;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
   /* 메인 프레임 및 상태 클래스 필드 */
-  MainFrame mainFrame = null;
-  private Level level = Level.MIDDLE;
+  MainFrame mf;
+  private Level level = Level.NORMAL;
   private Mode mode = Mode.NORMAL;
 
   /* 화면 구성요소 클래스 필드 */
@@ -27,7 +28,6 @@ public class LoginPanel extends JPanel {
   private JMenuItem lowLvItem = null;
   private JMenuItem midLvItem = null;
   private JMenuItem highLvItem = null;
-  private JMenuItem challLvItem = null;
   private JMenuBar modeMenuBar = null;
   private JMenu modeMenu = null;
   private JMenuItem normalItem = null;
@@ -44,7 +44,7 @@ public class LoginPanel extends JPanel {
 
   /* 로그인 패널 메인 로직 */
   LoginPanel(MainFrame mf) {
-    mainFrame = mf;
+    this.mf = mf;
     init();
     initMenu();
     setLoginBox();
@@ -53,8 +53,8 @@ public class LoginPanel extends JPanel {
   /* 기본 환경 설정 */
   public void init() {
     this.setBackground(Color.black);
+    this.setPreferredSize(new Dimension(1200, 730));
     this.setLayout(new GridBagLayout());
-    this.setPreferredSize(new Dimension(800, 500));
 
     gbc.fill = GridBagConstraints.BOTH;
     gbc.weightx = 1.0;
@@ -62,9 +62,9 @@ public class LoginPanel extends JPanel {
 
     titleImage = new ImageIcon("img/title.png");
     titleLabel = new JLabel(titleImage, SwingConstants.CENTER);
+    titleLabel.setBorder(new EmptyBorder(70, 0, 0, 0));
     gbc.gridx = 0;
     gbc.gridy = 0;
-    gbc.insets = new Insets(-20, 0, 0, 0);
     this.add(titleLabel, gbc);
 
     Dimension lblSize = new Dimension(80, 50);
@@ -98,17 +98,14 @@ public class LoginPanel extends JPanel {
     lowLvItem = new JMenuItem("  초급(9x9)");
     midLvItem = new JMenuItem("중급(16x16)");
     highLvItem = new JMenuItem("상급(16x30)");
-    challLvItem = new JMenuItem("도전(20x30)");
 
     lowLvItem.addActionListener(new levelActionListener());
     midLvItem.addActionListener(new levelActionListener());
     highLvItem.addActionListener(new levelActionListener());
-    challLvItem.addActionListener(new levelActionListener());
 
     difficultyMenu.add(lowLvItem);
     difficultyMenu.add(midLvItem);
     difficultyMenu.add(highLvItem);
-    difficultyMenu.add(challLvItem);
     diffMenuBar.add(difficultyMenu);
 
     modeMenu = new JMenu("     노말 모드");
@@ -134,7 +131,6 @@ public class LoginPanel extends JPanel {
     loginBox.setPreferredSize(new Dimension(380, 200));
     loginBox.setOpaque(true);
     loginBox.setBackground(Color.WHITE);
-
 
     JPanel firstPanel = new JPanel();
     firstPanel.add(nameTextField, SwingConstants.CENTER);
@@ -167,8 +163,9 @@ public class LoginPanel extends JPanel {
     thirdPanel.setBackground(Color.WHITE);
     fourthPanel.setBackground(Color.WHITE);
     gbc.gridy = 1;
-    gbc.anchor = GridBagConstraints.CENTER; // 패널의 중앙에 배치
-    gbc.fill = GridBagConstraints.NONE; // 크기를 고정하여 가로로 확장되지 않도록 설정
+    gbc.insets = new Insets(50, 0, 0, 0);
+    gbc.anchor = GridBagConstraints.NORTH;
+    gbc.fill = GridBagConstraints.NONE;
     this.add(loginBox, gbc);
   }
 
@@ -176,17 +173,14 @@ public class LoginPanel extends JPanel {
   class levelActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == lowLvItem) {
-        level = Level.LOW;
+        level = Level.EASY;
         difficultyMenu.setText("  초급(9x9)");
       } else if (e.getSource() == midLvItem) {
-        level = Level.MIDDLE;
+        level = Level.NORMAL;
         difficultyMenu.setText("중급(16x16)");
-      } else if (e.getSource() == highLvItem){
-        level = Level.HIGH;
-        difficultyMenu.setText("상급(16x30)");
       } else {
-        level = Level.CHALLENGE;
-        difficultyMenu.setText("도전(20x30)");
+        level = Level.HARD;
+        difficultyMenu.setText("상급(16x30)");
       }
     }
   }
@@ -207,15 +201,14 @@ public class LoginPanel extends JPanel {
   /* How To, Start 버튼 액션 리스너 */
   class buttonActionListener extends Component implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      if(e.getSource() == howToButton) {
+      if (e.getSource() == howToButton) {
         JOptionPane.showMessageDialog(this, "지뢰를 피해 모든 칸을 여는 게임입니다.", "How To", JOptionPane.INFORMATION_MESSAGE);
-      }
-      else if(e.getSource() == startButton && nameTextField.getText().isEmpty()) {
+      } else if (e.getSource() == startButton && nameTextField.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "게임을 시작하려면 이름을 입력해야 합니다.", "오류!", JOptionPane.WARNING_MESSAGE);
       } else {
         Player p = new Player(nameTextField.getText());
-        mainFrame.changeGame(level, mode);
-        mainFrame.cards.show(mainFrame.cardPanel, "game");
+        nameTextField.setText("");
+        mf.changeGame(level, mode);
       }
     }
   }

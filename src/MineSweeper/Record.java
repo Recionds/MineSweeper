@@ -29,8 +29,23 @@ public class Record {
     return mode;
   }
 
-  public int getTime() {
-    return time;
+  public String getTime() {
+    int hours = time / 3600;
+            int minutes = (time % 3600) / 60;
+            int seconds = time % 60;
+
+            // 형식 지정
+            StringBuilder formattedTime = new StringBuilder();
+            if (hours > 0) {
+                formattedTime.append(hours).append("시간 ");
+            }
+            if (minutes > 0) {
+                formattedTime.append(minutes).append("분 ");
+            }
+            if (seconds > 0 || formattedTime.length() == 0) { // 초를 항상 표시 (시간과 분이 둘 다 0인 경우)
+                formattedTime.append(seconds).append("초");
+            }
+            return formattedTime.toString();
   }
 
   Record (Scanner sc) {

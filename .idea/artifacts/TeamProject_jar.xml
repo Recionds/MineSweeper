@@ -1,0 +1,48 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TeamProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TeamProject_jar</output-path>
+    <root id="archive" name="TeamProject.jar">
+      <element id="module-output" name="TeamProject" />
+      <element id="module-source" name="TeamProject" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/0n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/0n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/1n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/1n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/1s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/2n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/2n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/2s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/3n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/3n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/3s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/4n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/4n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/4s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/5n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/5n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/5s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/6n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/6n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/6s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/7n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/7n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/7s.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/8n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/8n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/9n.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/9n.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/close.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/default.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/flag.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/icon.gif" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/mine1.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/mine2.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/mine3.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/pressed.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/timediv.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/title.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/Img/wildcard.png" />
+      <element id="dir-copy" path="$PROJECT_DIR$/Img" />
+    </root>
+  </artifact>
+</component>

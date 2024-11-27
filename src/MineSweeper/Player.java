@@ -6,6 +6,4 @@ public class Player {
   Player (String name) {
     Player.name = name;
   }
-
-  public String getName() { return name; }
 }
