@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
   /* 메인 프레임 및 상태 클래스 필드 */
-  MainFrame mf;
+  private MainFrame mf;
   private Level level = Level.NORMAL;
   private Mode mode = Mode.NORMAL;
 
@@ -60,7 +60,7 @@ public class LoginPanel extends JPanel {
     gbc.weightx = 1.0;
     gbc.weighty = 1.0;
 
-    titleImage = new ImageIcon("img/title.png");
+    titleImage = new ImageIcon(getClass().getResource("/title.png"));
     titleLabel = new JLabel(titleImage, SwingConstants.CENTER);
     titleLabel.setBorder(new EmptyBorder(70, 0, 0, 0));
     gbc.gridx = 0;
@@ -202,12 +202,13 @@ public class LoginPanel extends JPanel {
   class buttonActionListener extends Component implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == howToButton) {
-        JOptionPane.showMessageDialog(this, "지뢰를 피해 모든 칸을 여는 게임입니다.", "How To", JOptionPane.INFORMATION_MESSAGE);
+        mf.showHowToCard();
       } else if (e.getSource() == startButton && nameTextField.getText().isEmpty()) {
         JOptionPane.showMessageDialog(this, "게임을 시작하려면 이름을 입력해야 합니다.", "오류!", JOptionPane.WARNING_MESSAGE);
       } else {
         Player p = new Player(nameTextField.getText());
         nameTextField.setText("");
+        MainFrame.isLogin = true;
         mf.changeGame(level, mode);
       }
     }

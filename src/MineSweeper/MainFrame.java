@@ -2,6 +2,7 @@ package MineSweeper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MainFrame extends JFrame {
   /* 상태 클래스 필드 */
@@ -15,12 +16,22 @@ public class MainFrame extends JFrame {
   private HowToPanel howToPanel = null;
   private MyScorePanel myScorePanel = null;
 
+  /* 랭킹 파일 경로 */
+  public static final String FILE_NAME = "ranking.txt";
+  public static final String currentDirectory = System.getProperty("user.dir");
+  public static final String filePath = currentDirectory + File.separator + FILE_NAME;
+
   /* 화면 전환 레이아웃 */
-  CardLayout cards = new CardLayout();
-  Container cardPanel;
+  private CardLayout cards = new CardLayout();
+  private Container cardPanel;
+
+  /* 로그인 상태 확인 */
+  public static boolean isLogin = false;
 
   MainFrame() {
     setTitle("지뢰찾기");
+    ImageIcon icon = new ImageIcon(getClass().getResource("/icon.png"));
+    setIconImage(icon.getImage());
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     /* 화면 생성 후, 기본으로 로그인 화면 설정*/
     loginPanel = new LoginPanel(this);
@@ -55,11 +66,11 @@ public class MainFrame extends JFrame {
     rankingPanel.setRankingBox();
   }
 
-  public void showMyScorePanel() {
+  public void showMyScoreCard() {
     cards.show(cardPanel, "myscore");
   }
 
-  public void showHowToPanel() {
+  public void showHowToCard() {
     cards.show(cardPanel, "howto");
   }
 

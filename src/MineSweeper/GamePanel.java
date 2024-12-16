@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener {
   private Level level = Level.NORMAL;
   private Mode mode = Mode.NORMAL;
   private Game game = Game.READY;
+  private boolean isGameWin = false;
 
 
   /* 화면 구성요소 필드 */
@@ -147,8 +148,8 @@ public class GamePanel extends JPanel implements ActionListener {
     } else {
       ROWS = 16;
       COLS = 30;
-      MINE = 1;
-      checkMine = 1;
+      MINE = 99;
+      checkMine = 99;
       lifeItem = 3;
       flashItem = 8;
       remainLifeItem = 3;
@@ -190,29 +191,29 @@ public class GamePanel extends JPanel implements ActionListener {
   public void setImageLoading() {
     numImgList = new ImageIcon[11];
     for (int i = 0; i < 10; i++)
-      numImgList[i] = new ImageIcon("img/" + i + "n.png");
+      numImgList[i] = new ImageIcon(getClass().getResource("/" + i + "n.png"));
 
     mineImgList = new ImageIcon[4];
     for (int i = 0; i < 4; i++)
-      mineImgList[i] = new ImageIcon("img/mine" + (i + 1) + ".png");
+      mineImgList[i] = new ImageIcon(getClass().getResource("/mine" + (i + 1) + ".png"));
 
     tileNumImgList = new ImageIcon[7];
     for (int i = 0; i < 7; i++)
-      tileNumImgList[i] = new ImageIcon("img/" + (i + 1) + "s.png");
+      tileNumImgList[i] = new ImageIcon(getClass().getResource("/" + (i + 1) + "s.png"));
 
     lifeImgList = new ImageIcon[2];
     for (int i = 0; i < 2; i++)
-      lifeImgList[i] = new ImageIcon("img/life" + i + ".png");
+      lifeImgList[i] = new ImageIcon(getClass().getResource("/life" + i + ".png"));
     flashImgList = new ImageIcon[2];
     for (int i = 0; i < 2; i++)
-      flashImgList[i] = new ImageIcon("img/flash" + i + ".png");
+      flashImgList[i] = new ImageIcon(getClass().getResource("/flash" + i + ".png"));
 
-    defaultImage = new ImageIcon("img/default.png");
-    closeImage = new ImageIcon("img/close.png");
-    pressedImage = new ImageIcon("img/pressed.png");
-    wildcardImage = new ImageIcon("img/wildcard.png");
-    flagImage = new ImageIcon("img/flag.png");
-    timedivImage = new ImageIcon("img/timediv.png");
+    defaultImage = new ImageIcon(getClass().getResource("/default.png"));
+    closeImage = new ImageIcon(getClass().getResource("/close.png"));
+    pressedImage = new ImageIcon(getClass().getResource("/pressed.png"));
+    wildcardImage = new ImageIcon(getClass().getResource("/wildcard.png"));
+    flagImage = new ImageIcon(getClass().getResource("/flag.png"));
+    timedivImage = new ImageIcon(getClass().getResource("/timediv.png"));
   }
 
   /* 진행 정보 패널 설정 */
@@ -549,6 +550,7 @@ public class GamePanel extends JPanel implements ActionListener {
   //뒤로가기 액션 리스너
   class backActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
+      MainFrame.isLogin = false;
       mf.showLoginCard();
     }
   }
@@ -583,11 +585,11 @@ public class GamePanel extends JPanel implements ActionListener {
   class menuActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == myScoreBtn) {
-        mf.showMyScorePanel();
+        mf.showMyScoreCard();
       } else if (e.getSource() == rankingBtn) {
         mf.showRankingCard();
       } else if (e.getSource() == howToPlayBtn) {
-        mf.showHowToPanel();
+        mf.showHowToCard();
       } else if (e.getSource() == endGameBtn) {
         int result;
         result = JOptionPane.showConfirmDialog(mf, "게임을 종료하시겠습니까?", "Game End",
@@ -718,14 +720,35 @@ public class GamePanel extends JPanel implements ActionListener {
   public void calculateScore() {
     int defaultScore = 0;
     int div = time;
+    int openTile = 0;
     if (div == 0) div = 1;
-    if (level == Level.EASY) defaultScore = 5000;
-    else if (level == Level.NORMAL) defaultScore = 10000;
-    else if (level == Level.HARD) defaultScore = 15000;
-    if (mode == Mode.NORMAL)
-      score = (defaultScore / div) + defaultScore;
-    else
-      score = (defaultScore + time * 10);
+    if (level == Level.EASY) defaultScore = 10000;
+    else if (level == Level.NORMAL) defaultScore = 30000;
+    else if (level == Level.HARD) defaultScore = 50000;
+    for (int r = 0; r < ROWS; r++) {
+      for (int c = 0; c < COLS; c++) {
+        if (tile[r][c].getState() == State.OPEN) openTile++;
+      }
+    }
+    if (mode == Mode.NORMAL) {
+      if (isGameWin) score = defaultScore + (defaultScore / div);
+      else score = openTile * 10;
+    }
+    else if (mode == Mode.TIMEATTACK) {
+      if(isGameWin) score = defaultScore + (defaultScore / div) + 3000;
+      else score = (openTile * 10) + 500;
+    }
+  }
+
+  public void recordScore() {
+    try {
+      FileWriter fileWriter = new FileWriter(MainFrame.filePath, true);
+      String st = "\n" + new Record(Player.name, level.toString(), mode.toString(), time, score, isGameWin + "");
+      fileWriter.write(st);
+      fileWriter.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void endGame() {
@@ -762,6 +785,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
   /*  게임 승리  */
   public void gameWin() {
+    isGameWin = true;
     endGame();
     removeTileListener();
     calculateScore();
@@ -783,14 +807,7 @@ public class GamePanel extends JPanel implements ActionListener {
       };
       time--;
     }
-    try {
-      FileWriter fileWriter = new FileWriter("ranking.txt", true);
-      String st = "\n" + new Record(Player.name, level.toString(), mode.toString(), time, score);
-      fileWriter.write(st);
-      fileWriter.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    recordScore();
   }
 
   /*  게임 종료  */
@@ -805,9 +822,11 @@ public class GamePanel extends JPanel implements ActionListener {
       JOptionPane.showMessageDialog(this, "지뢰를 밟았습니다...\n플레이어 : " + Player.name + "\n남은 시간 : " + calculateTimeToString() +
               "\n플레이 난이도 : " + levelMap.get(level) + "\n플레이 모드 : " + modeMap.get(mode), "Game Over...", JOptionPane.OK_OPTION);
     } else {
-      JOptionPane.showMessageDialog(this, "지뢰를 밟았습니다...\n플레이어 : " + Player.name + "\n플레이 타임 : " + calculateTimeToString() +
+      JOptionPane.showMessageDialog(this, "지뢰를 밟았습니다...\n플레이어 : " + Player.name + "\n플레이 시간 : " + calculateTimeToString() +
               "\n플레이 난이도 : " + levelMap.get(level) + "\n플레이 모드 : " + modeMap.get(mode), "Game Over...", JOptionPane.OK_OPTION);
     }
+    calculateScore();
+    if(score != 0)recordScore();
     endGame();
   }
 
@@ -816,6 +835,8 @@ public class GamePanel extends JPanel implements ActionListener {
     gameEndProcess();
     JOptionPane.showMessageDialog(this, "제한시간 안에 모든 지뢰를 찾지 못했습니다...\n플레이어 : " + Player.name +
             "\n플레이 난이도 : " + levelMap.get(level) + "\n플레이 모드 : " + modeMap.get(mode), "Time Over...", JOptionPane.OK_OPTION);
+    calculateScore();
+    if(score != 0)recordScore();
     endGame();
   }
 
@@ -1057,6 +1078,7 @@ public class GamePanel extends JPanel implements ActionListener {
       try {
         Thread.sleep(2000);
         for (Tile tile : tilesToReset) {
+          if (tile.getState() == State.FLAG || tile.getState() == State.WILDCARD) continue;
           tile.setIcon(closeImage);
         }
       } catch (InterruptedException e) {

@@ -15,7 +15,6 @@ public class Tile extends JButton {
 		this.row = row;
 		this.col = col;
 	}
-	public void setFace(int face) { this.face = face; }
 	public int getFace() { return this.face; }
 	public int getRow() { return this.row; }
 	public int getCol() { return this.col; }

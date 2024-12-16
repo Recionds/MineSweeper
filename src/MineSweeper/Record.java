@@ -8,13 +8,15 @@ public class Record {
   private String mode;
   private int time;
   private int score;
+  private String isGameWin;
 
-  Record(String n, String l, String m, int t, int s) {
+  Record(String n, String l, String m, int t, int s, String is) {
     name = n;
     level = l;
     mode = m;
     time = t;
     score = s;
+    isGameWin = is;
   }
 
   public String getName() {
@@ -54,6 +56,11 @@ public class Record {
     mode = sc.next();
     time = sc.nextInt();
     score = sc.nextInt();
+    isGameWin = sc.next();
+  }
+
+  public String getIsGameWin() {
+    return isGameWin;
   }
 
   public int getScore() {
@@ -61,6 +68,6 @@ public class Record {
   }
 
   public String toString() {
-    return name + " " + level + " " + mode + " " + time + " " + score;
+    return name + " " + level + " " + mode + " " + time + " " + score + " " + isGameWin;
   }
 }
